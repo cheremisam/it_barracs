@@ -6,13 +6,12 @@ from ..users.schemas import User
 class BasePost(BaseModel):
     date: date
     text: str
-    user_id: int
 
 class PostCreate(BasePost):
-    pass
+    user_id: int
 
 class PostUpdate(BasePost):
-    pass
+    user_id: int
 
 class Post(BasePost):
     id: int

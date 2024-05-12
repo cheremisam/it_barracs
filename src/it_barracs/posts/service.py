@@ -4,14 +4,14 @@ from fastapi import Depends
 from sqlalchemy.orm import Session
 
 from ..database import get_session
-from . import models
+from . import models, schemas
 
 
 class PostsService:
     def __init__(self, session: Session = Depends(get_session)):
         self.session = session
 
-    def get_many(self) -> List[models.Post]:
+    def get_many(self) -> List[schemas.Post]:
         posts = (
             self.session
             .query(models.Post)
@@ -19,7 +19,7 @@ class PostsService:
         )
         return posts
 
-    def get(self, post_id: int) -> models.Post:
+    def get(self, post_id: int) -> schemas.Post:
         post = (
             self.session
             .query(models.Post)
