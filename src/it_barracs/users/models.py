@@ -1,12 +1,14 @@
-from sqlalchemy import MetaData, Table, Column, Integer, String
+from sqlalchemy import Column, Integer, String
+from sqlalchemy.orm import relationship
 
-metadata = MetaData()
+from ..database import Base
 
-users = Table(
-    'users',
-    metadata,
-    Column("id", Integer, primary_key=True),
-    Column("email", String, nullable=False),
-    Column("username", String, nullable=False),
-    Column("password_hash", String, nullable=False)
-)
+class User(Base):
+    __tablename__ = 'users'
+
+    id = Column(Integer, primary_key=True)
+    email = Column(String, nullable=False)
+    username = Column(String, nullable=False)
+    password_hash = Column(String, nullable=False)
+
+    posts = relationship("Post", back_populates="user")

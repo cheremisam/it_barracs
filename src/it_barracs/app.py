@@ -1,7 +1,19 @@
 from fastapi import FastAPI
 
-app = FastAPI()
+from . import api
 
-@app.get('/')
-def root():
-    return {"message": "hello"}
+tags_metadata = [
+    {
+        'name': 'posts',
+        'description': 'Создание, редактирование, удаление и просмотр постов.'
+    },
+]
+
+app = FastAPI(
+    title='It Barracs',
+    description='Сервис для отработки навыков CRUDошлепства',
+    version='1.0.0',
+    openapi_tags=tags_metadata,
+)
+
+app.include_router(api.router)
